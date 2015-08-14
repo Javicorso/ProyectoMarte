@@ -45,7 +45,7 @@ public class PruebaLector {
         FileReader file = new FileReader(f);
         BufferedReader br = new BufferedReader(file);
         String linea;
-        Archivo archivo = new Archivo();
+        Archivo archivo = Archivo.getInstance();
         while ((linea = br.readLine()) != null) {
             cont++;
             archivo.getLinea().add(linea);

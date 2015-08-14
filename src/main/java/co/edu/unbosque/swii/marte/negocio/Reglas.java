@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.JFrame;
 
 /**
  *
@@ -16,14 +17,13 @@ import java.util.regex.Pattern;
  */
 public class Reglas {
 
-    public static Tablero iniciarTablero(Archivo archivo) {
+    public static Tablero iniciarTablero(Archivo archivo, JFrame f){
         ArrayList<String> lineas = archivo.getLinea();
         String linea = lineas.get(0);
         String[] l = linea.split(" ");
-        Tablero tablero = new Tablero();
-        tablero.setX(Integer.valueOf(l[0]));
-        tablero.setY(Integer.valueOf(l[1]));
-        return tablero;
+        Tablero t;
+        t = Tablero.getInstace(f, Integer.valueOf(l[0]), Integer.valueOf(l[1]));
+        return t;
     }
 
     public static Robot iniciarRobot(String posicion) throws IOException, NumberFormatException {

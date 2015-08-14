@@ -12,11 +12,23 @@ import java.util.ArrayList;
  * @author Huber
  */
 public class Archivo {
-    
+
+    private static Archivo instance;
     private ArrayList<String> linea;
 
+    private Archivo() {
+
+    }
+
+    public static Archivo getInstance() {
+        if (instance == null) {
+            instance = new Archivo();
+        }
+        return instance;
+    }
+
     public ArrayList<String> getLinea() {
-        if(linea == null){
+        if (linea == null) {
             linea = new ArrayList<>();
         }
         return linea;

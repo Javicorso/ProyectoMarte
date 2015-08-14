@@ -18,9 +18,9 @@ import java.io.IOException;
  */
 public class Lector {
 
-    public Archivo setArchivo(String url) throws FileNotFoundException, IOException {
+    public static Archivo setArchivo(String url) throws FileNotFoundException, IOException {
         File f = new File(url);
-        Archivo archivo = new Archivo();
+        Archivo archivo = Archivo.getInstance();
         if (!f.exists()) {
             throw new FileNotFoundException();
         } else {

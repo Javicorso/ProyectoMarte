@@ -9,7 +9,6 @@ import co.edu.unbosque.swii.marte.negocio.Archivo;
 import co.edu.unbosque.swii.marte.negocio.Reglas;
 import co.edu.unbosque.swii.marte.negocio.Robot;
 import co.edu.unbosque.swii.marte.negocio.Tablero;
-import co.edu.unbosque.swii.marte.util.Lector;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -20,14 +19,9 @@ import java.util.ArrayList;
 public class Control {
 
     public Tablero tablero;
-    private Archivo archivo;
+    private static Archivo archivo = Archivo.getInstance();
     private ArrayList<Robot> listRobots;
 
-    public void inicio() throws IOException {
-        Lector lector = new Lector();
-        archivo = lector.setArchivo("src/main/resources/tablero.txt");
-        tablero = Reglas.iniciarTablero(archivo);
-    }
 
     public void moverRobot() throws IOException {
         ArrayList<String> lineas = archivo.getLinea();
@@ -38,7 +32,7 @@ public class Control {
                     listRobots.add(newRobot);
                 case 0:
                     Robot robot = Reglas.moverRobot(listRobots.get(i - 1), lineas.get(i));
-                    listRobots.
+                    listRobots.set(i-1, robot);
             }
         }
     }
