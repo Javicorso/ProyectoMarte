@@ -9,10 +9,11 @@ package co.edu.unbosque.swii.marte.negocio;
  *
  * @author Huber
  */
-public class Tablero {
+public class Robot {
     
     private int x;
     private int y;
+    private char orientacion;
 
     public int getX() {
         return x;
@@ -29,7 +30,15 @@ public class Tablero {
     public void setY(int y) {
         this.y = y;
     }
+
+    public char getOrientacion() {
+        return orientacion;
+    }
+
+    public void setOrientacion(char orientacion) {
+        this.orientacion = orientacion;
+    }
     
     
-    
+
 }

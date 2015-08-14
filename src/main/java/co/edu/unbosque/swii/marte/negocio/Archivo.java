@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Archivo {
     
-    ArrayList<String> linea;
+    private ArrayList<String> linea;
 
     public ArrayList<String> getLinea() {
         if(linea == null){

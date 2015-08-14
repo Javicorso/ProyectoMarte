@@ -20,6 +20,7 @@ public class Lector {
 
     public Archivo setArchivo(String url) throws FileNotFoundException, IOException {
         File f = new File(url);
+        Archivo archivo = new Archivo();
         if (!f.exists()) {
             throw new FileNotFoundException();
         } else {
@@ -27,18 +28,14 @@ public class Lector {
             FileReader file = new FileReader(f);
             BufferedReader br = new BufferedReader(file);
             String linea;
-            Archivo archivo = new Archivo();
             while ((linea = br.readLine()) != null) {
+                cont++;
                 archivo.getLinea().add(linea);
             }
             if (cont == 0) {
                 throw new IOException("El archivo está vacío");
             }
-            for (String col : archivo.getLinea()) {
-                System.out.println(col);
-            }
-            return archivo;
         }
+        return archivo;
     }
-
 }
