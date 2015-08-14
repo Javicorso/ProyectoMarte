@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.imageio.IIOException;
 import junit.framework.Assert;
 import org.testng.annotations.Test;
 

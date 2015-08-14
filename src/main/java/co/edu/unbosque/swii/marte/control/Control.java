@@ -18,30 +18,29 @@ import java.util.ArrayList;
  * @author Huber
  */
 public class Control {
-    
+
     public Tablero tablero;
     private Archivo archivo;
     private ArrayList<Robot> listRobots;
-    
-    public void inicio() throws IOException{
+
+    public void inicio() throws IOException {
         Lector lector = new Lector();
         archivo = lector.setArchivo("src/main/resources/tablero.txt");
         tablero = Reglas.iniciarTablero(archivo);
     }
-    
+
     public void moverRobot() throws IOException {
         ArrayList<String> lineas = archivo.getLinea();
-        int cont = 1;
-        for (String linea : lineas) {
-            switch(cont%2){
+        for (int i = 1; i < lineas.size(); i++) {
+            switch (i % 2) {
                 case 1:
-                    Robot robot = Reglas.iniciarRobot(linea);
-                    listRobots.add(robot);
+                    Robot newRobot = Reglas.iniciarRobot(lineas.get(i));
+                    listRobots.add(newRobot);
                 case 0:
-                    
-                   
+                    Robot robot = Reglas.moverRobot(listRobots.get(i - 1), lineas.get(i));
+                    listRobots.
             }
         }
     }
-    
+
 }
