@@ -34,4 +34,26 @@ public class Archivo {
         return linea;
     }
 
+    public Tablero getTablero() {
+        String lineaTablero=linea.get(0);
+        String parts[]=lineaTablero.split(" ");
+        int x=Integer.parseInt(parts[0]);
+        int y=Integer.parseInt(parts[1]);
+        
+        return new Tablero(x,y);
+    }
+
+    public Robot getRobot() {
+        String lineaTablero=linea.get(1);
+        String parts[]=lineaTablero.split(" ");
+        int x=Integer.parseInt(parts[0]);
+        int y=Integer.parseInt(parts[1]);
+        char orientacion=parts[2].charAt(0);
+        Robot ro=new Robot();
+        ro.setX(x);
+        ro.setY(y);
+        ro.setOrientacion(orientacion);
+        return ro;
+    }
+
 }

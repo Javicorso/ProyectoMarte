@@ -8,7 +8,7 @@ package co.edu.unbosque.swii.marte.control;
 import co.edu.unbosque.swii.marte.negocio.Archivo;
 import co.edu.unbosque.swii.marte.negocio.Reglas;
 import co.edu.unbosque.swii.marte.negocio.Robot;
-import co.edu.unbosque.swii.marte.negocio.Tablero;
+import co.edu.unbosque.swii.marte.gui.TableroGUI;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -18,8 +18,8 @@ import java.util.ArrayList;
  */
 public class Control {
 
-    public Tablero tablero;
-    private static Archivo archivo = Archivo.getInstance();
+    public TableroGUI tablero;
+    private static final Archivo archivo = Archivo.getInstance();
     private ArrayList<Robot> listRobots;
 
 
@@ -31,7 +31,7 @@ public class Control {
                     Robot newRobot = Reglas.iniciarRobot(lineas.get(i));
                     listRobots.add(newRobot);
                 case 0:
-                    Robot robot = Reglas.moverRobot(listRobots.get(i - 1), lineas.get(i));
+                    Robot robot = Reglas.moverRobot(listRobots.get(listRobots.size() - 1), lineas.get(i));
                     listRobots.set(i-1, robot);
             }
         }

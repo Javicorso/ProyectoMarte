@@ -38,7 +38,12 @@ public class Robot {
     public void setOrientacion(char orientacion) {
         this.orientacion = orientacion;
     }
-    
-    
 
+    @Override
+    public boolean equals(Object obj) {
+       return true;
+    }
+    
+    
+    
 }

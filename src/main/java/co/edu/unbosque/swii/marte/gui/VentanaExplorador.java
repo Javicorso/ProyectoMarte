@@ -21,7 +21,7 @@ import javax.swing.JLabel;
 public class VentanaExplorador extends JFrame implements ActionListener {
 
     private Container contenedor;
-    JButton botonCambiar;
+    JButton leerArchivo;
     JLabel labelTitulo;
     private VentanaExplorador ventana;
 
@@ -47,21 +47,21 @@ public class VentanaExplorador extends JFrame implements ActionListener {
         contenedor = getContentPane();
         contenedor.setLayout(null);
 
-        botonCambiar = new JButton();
-        botonCambiar.setText("Leer archivo");
-        botonCambiar.setBounds(100, 80, 80, 23);
-        botonCambiar.addActionListener(this);
+        leerArchivo = new JButton();
+        leerArchivo.setText("Leer archivo");
+        leerArchivo.setBounds(100, 80, 80, 23);
+        leerArchivo.addActionListener(this);
 
         labelTitulo = new JLabel("Cargar archivo de coordenadas");
         labelTitulo.setBounds(10,20,300,30);
 
         contenedor.add(labelTitulo);
-        contenedor.add(botonCambiar);
+        contenedor.add(leerArchivo);
     }
 
     @Override
     public void actionPerformed(ActionEvent evento) {
-        if (evento.getSource() == botonCambiar) {
+        if (evento.getSource() == leerArchivo) {
             new TableroMarte();
         }
     }

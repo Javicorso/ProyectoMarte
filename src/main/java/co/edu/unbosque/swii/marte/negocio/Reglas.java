@@ -5,6 +5,7 @@
  */
 package co.edu.unbosque.swii.marte.negocio;
 
+import co.edu.unbosque.swii.marte.gui.TableroGUI;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -17,12 +18,12 @@ import javax.swing.JFrame;
  */
 public class Reglas {
 
-    public static Tablero iniciarTablero(Archivo archivo, JFrame f){
+    public static TableroGUI iniciarTablero(Archivo archivo, JFrame f){
         ArrayList<String> lineas = archivo.getLinea();
         String linea = lineas.get(0);
         String[] l = linea.split(" ");
-        Tablero t;
-        t = Tablero.getInstace(f, Integer.valueOf(l[0]), Integer.valueOf(l[1]));
+        TableroGUI t;
+        t = TableroGUI.getInstace(f, Integer.valueOf(l[0]), Integer.valueOf(l[1]));
         return t;
     }
 

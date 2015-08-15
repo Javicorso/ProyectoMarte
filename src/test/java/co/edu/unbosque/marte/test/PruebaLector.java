@@ -5,6 +5,7 @@
  */
 package co.edu.unbosque.marte.test;
 
+import co.edu.unbosque.swii.marte.negocio.Tablero;
 import co.edu.unbosque.swii.marte.negocio.Archivo;
 import co.edu.unbosque.swii.marte.negocio.Reglas;
 import co.edu.unbosque.swii.marte.negocio.Robot;
@@ -38,77 +39,40 @@ public class PruebaLector {
         x.setArchivo("src/main/resources/tablero.txt");
     }
 
-    @Test
-    public void elArchivoNoEstaVacio() throws IOException {
-        File f = new File("src/main/resources/tablero.txt");
-        int cont = 0;
-        FileReader file = new FileReader(f);
-        BufferedReader br = new BufferedReader(file);
-        String linea;
-        Archivo archivo = Archivo.getInstance();
-        while ((linea = br.readLine()) != null) {
-            cont++;
-            archivo.getLinea().add(linea);
-        }
-        if (cont == 0) {
-            throw new IOException("El archivo está vacío");
-        }
-    }
+    
 
     @Test
     public void laPrimeraLineaEstaCorrecta() throws IOException {
-        File f = new File("src/main/resources/tablero.txt");
-        FileReader file = new FileReader(f);
-        BufferedReader br = new BufferedReader(file);
-        String linea;
+        Archivo a = Archivo.getInstance();
+        String linea = a.getLinea().get(0);
         String esperada = "5 5";
-        linea = br.readLine();
         Assert.assertEquals(linea, esperada);
     }
 
     @Test
-    public void laPrimeraLineaSonNumericos() throws NumberFormatException, IOException {
-        Lector lector = new Lector();
-        Archivo a = lector.setArchivo("src/main/resources/tablero.txt");
-        ArrayList<String> lineas = a.getLinea();
-        String linea = lineas.get(0);
-        String[] l = linea.split(" ");
-        int x = Integer.valueOf(l[0]);
-        int y = Integer.valueOf(l[1]);
-
+    public void esPosibleInstanciarUnTablero(){
+        Tablero tesperado=new Tablero(5,5);
+        Archivo a = Archivo.getInstance();
+        Tablero x=a.getTablero(); 
+        Assert.assertEquals(x,tesperado);
     }
 
-    @Test
-    public void validarCoordenadas() throws IOException {
-        Lector lector = new Lector();
-        Archivo a = lector.setArchivo("src/main/resources/tablero.txt");
-        ArrayList<String> lineas = a.getLinea();
-        String linea = lineas.get(0);
-        String[] l = linea.split(" ");
-        if (l.length != 2) {
-            throw new IOException("EL formato de coordendas es incorrecto");
-        }
-    }
+   
 
     @Test
     public void validaPosicionInicial() throws IOException, NumberFormatException {
-        Lector lector = new Lector();
-        Archivo a = lector.setArchivo("src/main/resources/tablero.txt");
-        ArrayList<String> lineas = a.getLinea();
-        String linea = lineas.get(1);
-        String[] l = linea.split(" ");
-        if (l.length != 3) {
-            throw new IOException("La posición inicial es incorrecta");
-        }
-        int x = Integer.valueOf(l[0]);
-        int y = Integer.valueOf(l[1]);
-        char p = l[2].charAt(0);
+        Archivo a = Archivo.getInstance();
+        Robot esperado=new Robot();
+        esperado.setX(1);
+        esperado.setY(4);
+        esperado.setOrientacion('N');
+        Robot r=a.getRobot();
+        Assert.assertEquals(r,esperado);
     }
 
     @Test
     public void validaMovimientos() throws IOException, NumberFormatException {
-        Lector lector = new Lector();
-        Archivo a = lector.setArchivo("src/main/resources/tablero.txt");
+        Archivo a = Archivo.getInstance();
         ArrayList<String> lineas = a.getLinea();
         Pattern pat = Pattern.compile("(I|D|A)+");
         Matcher mat = pat.matcher(lineas.get(2));
