@@ -5,12 +5,9 @@
  */
 package co.edu.unbosque.swii.marte.negocio;
 
-import co.edu.unbosque.swii.marte.gui.TableroGUI;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.swing.JFrame;
 
 /**
  *
@@ -18,12 +15,11 @@ import javax.swing.JFrame;
  */
 public class Reglas {
 
-    public static TableroGUI iniciarTablero(Archivo archivo, JFrame f){
-        ArrayList<String> lineas = archivo.getLinea();
-        String linea = lineas.get(0);
-        String[] l = linea.split(" ");
-        TableroGUI t;
-        t = TableroGUI.getInstace(f, Integer.valueOf(l[0]), Integer.valueOf(l[1]));
+    public static Tablero iniciarTablero(String ini) {
+        String parts[] = ini.split(" ");
+        int x = Integer.parseInt(parts[0]);
+        int y = Integer.parseInt(parts[1]);
+        Tablero t = Tablero.getInstance(x, y);
         return t;
     }
 
@@ -39,7 +35,18 @@ public class Reglas {
         robot.setX(x);
         robot.setY(y);
         robot.setOrientacion(p);
+        robot.setMovs("");
         return robot;
+    }
+
+    public static Robot getRobotMovs(Robot r, String movs) throws IOException {
+        Pattern pat = Pattern.compile("(I|D|A)+");
+        Matcher mat = pat.matcher(movs);
+        if (!mat.matches()) {
+            throw new IOException("Los movimientos no están correctos");
+        }
+        r.setMovs(movs);
+        return r;
     }
 
     public static Robot moverRobot(Robot robot, String movimientos) throws IOException {
@@ -48,6 +55,7 @@ public class Reglas {
         if (!mat.matches()) {
             throw new IOException("Los movimientos no están correctos");
         }
+        robot.setMovs(movimientos);
         char[] charMov = movimientos.toCharArray();
         for (int i = 0; i < charMov.length; i++) {
             switch (charMov[i]) {
@@ -90,16 +98,16 @@ public class Reglas {
                 case 'A':
                     switch (robot.getOrientacion()) {
                         case 'N':
-                            robot.setOrientacion('O');
+                            robot.setY(robot.getY()-1);
                             break;
                         case 'O':
-                            robot.setOrientacion('S');
+                            robot.setX(robot.getX()-1);
                             break;
                         case 'S':
-                            robot.setOrientacion('E');
+                            robot.setY(robot.getY()+1);
                             break;
                         case 'E':
-                            robot.setOrientacion('N');
+                            robot.setX(robot.getX()+1);
                             break;
                         default:
                             throw new IOException("Orientación no válida");

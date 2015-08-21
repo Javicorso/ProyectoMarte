@@ -5,6 +5,7 @@
  */
 package co.edu.unbosque.swii.marte.negocio;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -35,25 +36,20 @@ public class Archivo {
     }
 
     public Tablero getTablero() {
-        String lineaTablero=linea.get(0);
-        String parts[]=lineaTablero.split(" ");
-        int x=Integer.parseInt(parts[0]);
-        int y=Integer.parseInt(parts[1]);
-        
-        return new Tablero(x,y);
+        String lineaTablero = linea.get(0);
+        return Reglas.iniciarTablero(lineaTablero);
     }
 
-    public Robot getRobot() {
-        String lineaTablero=linea.get(1);
-        String parts[]=lineaTablero.split(" ");
-        int x=Integer.parseInt(parts[0]);
-        int y=Integer.parseInt(parts[1]);
-        char orientacion=parts[2].charAt(0);
-        Robot ro=new Robot();
-        ro.setX(x);
-        ro.setY(y);
-        ro.setOrientacion(orientacion);
+    public Robot getRobot(int i) throws IOException, NumberFormatException {
+        String lineaTablero = linea.get(i);
+        Robot ro = Reglas.iniciarRobot(lineaTablero);
         return ro;
+    }
+
+    public Robot getRobotMovs(Robot r, int j) throws IOException {
+        String lineaTablero = linea.get(j);
+        r = Reglas.getRobotMovs(r, lineaTablero);
+        return r;
     }
 
 }

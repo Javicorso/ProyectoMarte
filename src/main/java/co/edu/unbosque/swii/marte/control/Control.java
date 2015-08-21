@@ -18,23 +18,18 @@ import java.util.ArrayList;
  */
 public class Control {
 
-    public TableroGUI tablero;
     private static final Archivo archivo = Archivo.getInstance();
-    private ArrayList<Robot> listRobots;
 
-
-    public void moverRobot() throws IOException {
-        ArrayList<String> lineas = archivo.getLinea();
-        for (int i = 1; i < lineas.size(); i++) {
-            switch (i % 2) {
-                case 1:
-                    Robot newRobot = Reglas.iniciarRobot(lineas.get(i));
-                    listRobots.add(newRobot);
-                case 0:
-                    Robot robot = Reglas.moverRobot(listRobots.get(listRobots.size() - 1), lineas.get(i));
-                    listRobots.set(i-1, robot);
-            }
+    public static Robot moverRobot(String movs, int i, Robot r) throws IOException {
+        switch (i % 2) {
+            case 1:
+                Robot newRobot = archivo.getRobot(i);
+                return newRobot;
+            case 0:
+                Robot robot = Reglas.moverRobot(r, movs);
+                return robot;
         }
+        return null;
     }
 
 }
